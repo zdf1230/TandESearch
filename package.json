@@ -1,0 +1,20 @@
+{
+  "name": "tandesearch",
+  "version": "1.0.0",
+  "description": "a webpage that allows users to search for places using the Google Places API and display the results",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "search",
+    "Google",
+    "API"
+  ],
+  "author": "Dongfang Zhao",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.16.3",
+    "yelp-fusion": "^2.0.3"
+  }
+}
