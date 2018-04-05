@@ -1,8 +1,11 @@
 const express = require("express");
 const https = require("https");
 const yelp = require("yelp-fusion");
+var cors = require('cors');
 
 var app = express();
+
+app.use(cors());
 
 app.use(function (req, res, next) {
     console.log(`${req.method} request for '${req.url}'`);
@@ -55,7 +58,7 @@ app.get("/place", function (req, res) {
         + reqInfo.lat + "," + reqInfo.lng
         + "&radius=" + reqInfo.distance * 1609.344
         + "&type=" + reqInfo.category
-        + "&keyowrd=" + reqInfo.keyword
+        + "&keyword=" + reqInfo.keyword
         + "&key=" + googleApiKey;
 
     var request = https.get(placeUrl, function(response) {
