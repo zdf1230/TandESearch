@@ -17,7 +17,7 @@ app.use(express.static("./public"));
 const googleApiKey = "AIzaSyATY-GC2b0J-8GgFc7xK8mrOX5Tm7S4RXA";
 const yelpApiKey = "vK5fdJLHak6-mTvA7KZYgU1vPQ-OhuTox5KNYmUbtINJK6EbNg3lKnIXO6IAxG7AEMSY8C7D1EpauOD0rhBJ1LWGD1shM6sT6iTmqSrk5amzkLmDExvdPr_BoZi4WnYx";
 const client = yelp.client(yelpApiKey);
-const accuracy = 0.00001;
+const accuracy = 0.001;
 
 app.get("/location", function (req, res) {
     var lat, lng;
@@ -119,15 +119,15 @@ app.get("/yelpreviews", function(req, res) {
         state : reqInfo.state,
         country : reqInfo.country,
         latitude : reqInfo.latitude,
-        longtitude : reqInfo.longtitude
+        longitude : reqInfo.longitude
     };
 
     client.businessMatch('best', searchRequest).then(response => {
         var result = response.jsonBody.businesses[0];
         console.log(result);
         if (result != null && check_accuracy(reqInfo.latitude, result.coordinates.latitude) 
-            && check_accuracy(reqInfo.longtitude, result.coordinates.longtitude)) {
-
+            && check_accuracy(reqInfo.longitude, result.coordinates.longitude)) {
+            
             client.reviews(result.id).then(response => {
                 res.json(response.jsonBody);
             }).catch(e => {
