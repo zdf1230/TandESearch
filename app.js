@@ -151,6 +151,6 @@ function check_accuracy(a, b) {
     return Math.abs(a - b) < accuracy;
 }
 
-app.listen(3000, function () {
-    console.log('TandESearch app running on port 3000');
-});
+app.set('PORT', process.env.PORT);
+
+app.listen(app.get('PORT'));
