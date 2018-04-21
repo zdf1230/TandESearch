@@ -151,6 +151,33 @@ function check_accuracy(a, b) {
     return Math.abs(a - b) < accuracy;
 }
 
-app.set('PORT', process.env.PORT);
+app.get("/placedetails", function(req, res) {
+    var detailsUrl = "https://maps.googleapis.com/maps/api/place/details/json?placeid=" 
+        + req.query.placeid
+        + "&key=" + googleApiKey;
+
+    var request = https.get(detailsUrl, function(response) {
+        var responseBody = "";
+
+        response.on("data", function(data) {
+            responseBody +=data;
+        });
+
+        response.on("end", function (err) {
+            if (err) {
+                throw err;
+            }
+            res.send(responseBody);
+        });
+    });
+
+    request.on("error", function (err) {
+        throw err;
+    });
+
+    request.end();
+});
+
+app.set('PORT', process.env.PORT || 3000);
 
 app.listen(app.get('PORT'));
